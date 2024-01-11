@@ -7,26 +7,30 @@ import { Route, Routes } from 'react-router-dom'
 import Home from './views/Home'
 import NotFound from './views/NotFound'
 import Register from './views/Register'
-import { FaMoon } from "react-icons/fa";
-import { FaRegSun } from "react-icons/fa6";
+import Navbar from './components/Navbar'
+import Information from './views/Information'
+import Invoice from './views/Invoice'
+import Payments from './views/Payments'
+import Handle from './views/Handle'
+import MyServices from './views/MyServices'
+import MyServicesD from './views/MyServices/detail'
+import ConsumptionSimulator from './views/ConsumptionSimulator'
+
 
 function App() {
-  const [count, setCount] = useState(0)
-  const [dark, setdark] = useState("")
-  const [iconMode, setIconmode] = useState(<FaMoon />)
-  const darkMode = () => {
-      setdark(dark == "" ? "dark" : "");
-      setIconmode(dark == "" ? <FaRegSun /> : <FaMoon />);
-      dark == "" ? document.body.classList.add('dark') : document.body.classList.remove('dark');
-  }
-  const rutes = [{name: '/Login', element: <Login/>},
-  {name: '/', element: <Home/>}, {name: '/*', element: <NotFound/>}, {name: '/Register', element: <Register/>}];
+  const rutes = [{ name: '/Login', element: <Login /> },
+  { name: '/', element: <Home /> }, { name: '/*', element: <NotFound /> }, { name: '/Register', element: <Register /> },
+  { name: '/Information', element: <Information /> }, { name: '/Invoice', element: <Invoice /> }, { name: '/Payments', element: <Payments /> },
+  { name: '/Handle', element: <Handle /> }, {name: '/MyServices', element: <MyServices />}, {name: '/ConsumptionSimulator', element: <ConsumptionSimulator />},
+  {name: '/detail', element: <MyServicesD />}];
   return (
-    <div className='w-screen h-screen'>
+    <div className='w-screen h-screen overflow-y-hidden'>
+      <Navbar />
       <Routes>
-        {rutes.map((rute, index) => (<Route path={rute.name} element={rute.element} />))}
+        {rutes.map((rute) => (
+          <Route key={rute.name} path={rute.name} element={rute.element} />
+        ))}
       </Routes>
-      <button className='bg-neutral-300 p-5 rounded-full absolute top-7 right-7' onClick={darkMode} >{iconMode}</button>
     </div>
   )
 }
